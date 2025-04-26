@@ -1,7 +1,7 @@
-<H3>ENTER YOUR NAME</H3>
-<H3>ENTER YOUR REGISTER NO.</H3>
+<H3>MUSFIRA MAHJABEEN M</H3>
+<H3>212223230130</H3>
 <H3>EX. NO.1</H3>
-<H3>DATE</H3>
+<H3>26.04.2025</H3>
 <H1 ALIGN =CENTER> Introduction to Kaggle and Data preprocessing</H1>
 
 ## AIM:
@@ -37,11 +37,64 @@ STEP 5:Normalizing the data<BR>
 STEP 6:Splitting the data into test and train<BR>
 
 ##  PROGRAM:
-TYPE YOUR CODE HERE
+```python
+from google.colab import files
+import pandas as pd
+import io
+from sklearn.preprocessing import StandardScaler
+from sklearn.preprocessing import MinMaxScaler
+from sklearn.model_selection import train_test_split
+
+# Load the dataset
+df = pd.read_csv('Churn_Modelling.csv')
+
+# Print the dataframe correctly (without quotes around 'df')
+print(df)
+
+# Separate features (X) and target (y)
+x = df.iloc[:, :-1].values
+print(x)
+
+y = df.iloc[:, -1].values
+print(y)
+
+# Check for missing values
+print(df.isnull().sum())
+
+# Fill missing values with the column mean (rounded to 1 decimal place)
+df.fillna(df.mean(numeric_only=True).round(1), inplace=True)
+
+# Check again for missing values
+print(df.isnull().sum())
+
+# Update y again after filling missing values (optional, only needed if you expect y to change, but it's fine)
+y = df.iloc[:, -1].values
+print(y)
+
+df.duplicated()
+print(df['Balance'].describe())
+scaler = MinMaxScaler()
+numeric_features=df.select_dtypes(include=['number'])
+df1 = pd.DataFrame(scaler.fit_transform(numeric_features))
+print(df1)
+
+X_train , X_test , y_train , y_test = train_test_split(x,y,test_size =0.2)
+print(X_test)
+print(len(X_train))
+print(X_test)
+print(len(X_test))
+```
 
 
 ## OUTPUT:
-SHOW YOUR OUTPUT HERE
+![image](https://github.com/user-attachments/assets/26d5ce55-672f-44b7-8367-d959c7c27fd4)
+![image](https://github.com/user-attachments/assets/594b9472-8f2e-4d4f-896f-516a8d680701)
+![image](https://github.com/user-attachments/assets/f9b654f9-054e-40ec-966b-49094276c511)
+![image](https://github.com/user-attachments/assets/f2338fa0-7919-4010-87dd-d7f3cec42d6e)
+
+
+
+
 
 
 ## RESULT:
